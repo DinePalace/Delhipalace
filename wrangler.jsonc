@@ -3,8 +3,8 @@
   "name": "delhipalace",
   "compatibility_date": "2026-09-12",
   "assets": {
-    "directory": "./public",
-    "html_handling": "auto-trailing-slash",
+    "directory": "./public_html",
+    "html_handling": "force-trailing-slash",
     "not_found_handling": "404-page"
   }
 }

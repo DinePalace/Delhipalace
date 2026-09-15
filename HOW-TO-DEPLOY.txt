@@ -1,0 +1,87 @@
+DELHI PALACE, website ready to deploy
+46 Dalhousie St, Brantford, ON N3T 2H8
+Prepared by Shaina Ahmed, DinePalace Marketing
+
+======================================================================
+WHAT CHANGED IN THIS VERSION
+======================================================================
+1. Every page now links to every other page.
+   Top menu, mobile menu and a new footer menu on all 7 pages:
+   Home, Order Online, Menu, About, Gallery, Contact Us, Privacy Policy.
+
+2. The Order page was cut off before. The "Order Online" menu item
+   jumped straight to FüdMe, so nothing on the site ever opened
+   order.html. It now opens the Order page. The gold "Order Now"
+   button, the floating order button and every order button inside
+   the pages still go straight to FüdMe web ordering.
+
+3. Links now point to the real files (menu.html, about.html ...) and
+   images load from assets/ without a leading slash. The site works:
+     - on Hostinger / cPanel
+     - on Cloudflare
+     - opened straight from the folder by double clicking index.html
+   On the live server, visitors still see the clean addresses Google
+   already knows: /menu, /about, /order and so on.
+
+4. 404 page is now marked noindex so Google does not list it.
+
+======================================================================
+HOW TO DEPLOY
+======================================================================
+HOSTINGER / cPANEL
+  1. Open File Manager, go into public_html.
+  2. Turn on "Show hidden files" so .htaccess is not missed.
+  3. Delete or back up what is there now (WordPress site = take a
+     full backup first).
+  4. Upload EVERYTHING that is INSIDE the public_html folder in this
+     zip: the 8 .html files, the assets folder, .htaccess,
+     robots.txt and sitemap.xml.
+     index.html must sit directly inside public_html, not inside a
+     sub folder.
+  5. Visit https://thedelhipalace.ca and click through the menu.
+
+CLOUDFLARE (DinePalace/Delhipalace repo)
+  Copy everything inside public_html into the repo's public/ folder,
+  push to main. The repo's own wrangler.jsonc already handles clean
+  URLs and the 404 page. .htaccess is ignored there, which is fine.
+
+PREVIEW ON YOUR OWN COMPUTER
+  Double click public_html/index.html. All menu links work.
+
+======================================================================
+PAGE ADDRESSES (live)
+======================================================================
+  Home             https://thedelhipalace.ca/
+  Order Online     https://thedelhipalace.ca/order
+  Menu             https://thedelhipalace.ca/menu
+  About            https://thedelhipalace.ca/about
+  Gallery          https://thedelhipalace.ca/gallery
+  Contact Us       https://thedelhipalace.ca/contact
+  Privacy Policy   https://thedelhipalace.ca/privacy-policy
+
+  FüdMe ordering   https://orders.foodme.mobi/dt/delhipalace/brantford/main
+  Phone            +1 (519) 304 9661
+
+======================================================================
+CHECKED BEFORE HANDOVER
+======================================================================
+Tested on a real Apache server with this exact .htaccess:
+  - 7 pages return 200, unknown addresses return the 404 page
+  - menu.html redirects to /menu, index.html to /, /menu/ to /menu
+  - 134 internal links, images, scripts and styles, 0 broken
+  - every page links to all 7 pages (top, mobile and footer menus)
+  - menu renders all 145 dishes and all 14 section photos
+  - clicked through desktop menu, mobile menu and footer menu
+  - opened from the folder with no server: all links and images work
+  - no sideways scrolling on a 390 px phone screen
+
+======================================================================
+UPDATE (2026-09-16)
+======================================================================
+Internal links now use the clean addresses directly (/menu, /about,
+/blog ...) instead of menu.html. The .htaccess serves them, so nothing
+changes on Hostinger — but the site now NEEDS a server; opening
+index.html straight from the folder will not navigate between pages.
+For a local preview run:  node preview-server.js  (in this folder)
+then open http://localhost:8124 — it behaves exactly like Hostinger,
+including the /about-us and /contact-us redirects.

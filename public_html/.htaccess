@@ -1,0 +1,59 @@
+# Delhi Palace, Apache / Hostinger / cPanel
+# Upload this file together with the pages into public_html.
+Options -Indexes
+Options +FollowSymLinks
+DirectoryIndex index.html
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# www to non-www
+RewriteCond %{HTTP_HOST} ^www\.thedelhipalace\.ca$ [NC]
+RewriteRule ^(.*)$ https://thedelhipalace.ca/$1 [R=301,L]
+
+# Legacy WordPress addresses Google already knows -> new addresses
+RewriteRule ^about-us/?$ /about/ [R=301,L]
+RewriteRule ^contact-us/?$ /contact/ [R=301,L]
+
+# Canonical URL shape: /menu/ (trailing slash), matching what Google
+# already indexed from the WordPress site. All asset paths in the pages
+# are absolute (/assets/...), so the slash is safe.
+#   /index.html -> /      /menu.html -> /menu/      /menu -> /menu/
+# THE_REQUEST only matches what the browser asked for, so no redirect loop.
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+RewriteCond %{THE_REQUEST} \s/+([^?\s]+)\.html[\s?] [NC]
+RewriteCond %1 !^404$ [NC]
+RewriteRule ^ /%1/ [R=301,L,NE]
+
+# Add the trailing slash (/menu -> /menu/)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)$ /$1/ [R=301,L]
+
+# Serve /menu/ from menu.html, /about/ from about.html, and so on.
+# Internal rewrite only, the address bar keeps the trailing-slash URL.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^/]+)/$ $1.html [L]
+
+ErrorDocument 404 /404.html
+
+# Cache images and assets hard, pages not at all
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType text/css   "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html  "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
