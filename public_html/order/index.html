@@ -33,6 +33,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css">
+<script>
+/* WEEKEND OFFER SWITCH: 50% off fried rice + noodles shows until Monday 16 Nov 2026, 12:00 am Toronto time (EST = 05:00 UTC).
+   From Monday the regular Buy 2 offer section comes back on its own. Keep this date in step with WEEKEND_END in /assets/js/dp-promo.js */
+(function(){var END=Date.UTC(2026,10,16,5,0,0);if(Date.now()<END){document.documentElement.className+=' dp-wknd';}})();
+</script>
 <link rel="stylesheet" href="/assets/css/dp-promo.css?v=20261112">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thedelhipalace.ca/"},{"@type":"ListItem","position":2,"name":"Order Online","item":"https://thedelhipalace.ca/order/"}]}
@@ -91,13 +96,59 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <main>
+<!-- ==================== WEEKEND OFFER: 50% OFF FRIED RICE + NOODLES (Fri 13 to Sun 15 Nov 2026) ====================
+     Shown only until Monday 16 Nov 2026, 12:00 am Toronto time (switch in the <head>). After that it hides itself
+     and the Buy 2 section below shows again. Safe to delete this whole section after Monday. -->
+<section class="section dp-bogo dp-bogo--weekend" id="weekend-offer" aria-labelledby="weekend-heading">
+  <div class="container">
+    <div class="dp-bogo__grid">
+      <div class="dp-bogo__media reveal">
+        <a class="dp-bogo__art" href="https://orders.foodme.mobi/dt/delhipalace/brantford/main" target="_blank" rel="noopener" aria-label="Order the 50% off fried rice and noodles weekend offer online">
+          <img src="/assets/img/promo-weekend-50-off.webp" width="1080" height="1350" loading="lazy" decoding="async"
+               alt="Weekend cravings? 50% off veg and chicken fried rice plus noodles at Delhi Palace Brantford, only Friday 13 to Sunday 15 November. App and online ordering only, delivery and pickup only. 46 Dalhousie St, Brantford.">
+        </a>
+        <span class="dp-bogo__badge" aria-hidden="true"><b>50%</b><small>Off</small></span>
+      </div>
+      <div class="dp-bogo__copy reveal">
+        <p class="eyebrow">Weekend Special &middot; Fri 13 to Sun 15 Nov</p>
+        <h2 class="title" id="weekend-heading">Veg &amp; Chicken Fried Rice + Noodles at <em>50% Off</em></h2>
+        <p class="lede">Weekend cravings? This one's for you. Order our veg or chicken fried rice and noodles on the Delhi Palace app or online this weekend and get them at half price.</p>
+        <ul class="dp-bogo__facts">
+          <li>
+            <span class="dp-bogo__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>
+            <span><b>3 days only</b>Friday 13 to Sunday 15 November</span>
+          </li>
+          <li>
+            <span class="dp-bogo__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span>
+            <span><b>App &amp; online orders only</b>Order on the app or our website</span>
+          </li>
+          <li>
+            <span class="dp-bogo__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>
+            <span><b>Delivery &amp; pickup only</b>Hot to your door, or ready to collect</span>
+          </li>
+          <li>
+            <span class="dp-bogo__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg></span>
+            <span><b>46 Dalhousie St</b>Downtown Brantford</span>
+          </li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-gold" href="https://orders.foodme.mobi/dt/delhipalace/brantford/main" target="_blank" rel="noopener">Order Now</a>
+        </div>
+        <p class="dp-bogo__apps">Get the app: <a href="https://apps.apple.com/us/app/delhi-palace/id6802938004" target="_blank" rel="noopener">App Store</a> <span aria-hidden="true">&middot;</span> <a href="https://play.google.com/store/apps/details?id=mobi.foodme.delhipalace" target="_blank" rel="noopener">Google Play</a></p>
+        <p class="dp-bogo__note">Veg &amp; chicken fried rice + noodles &middot; App &amp; online orders only</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== BUY 2 FOR SPECIAL PRICE OFFER ==================== -->
-<section class="section dp-bogo" id="bogo-offer" aria-labelledby="bogo-heading">
+<!-- Hidden during the weekend offer above; shows again automatically from Monday 16 Nov 2026, 12:00 am Toronto time. -->
+<section class="section dp-bogo dp-bogo--regular" id="bogo-offer" aria-labelledby="bogo-heading">
   <div class="container">
     <div class="dp-bogo__grid">
       <div class="dp-bogo__media reveal">
         <a class="dp-bogo__art" href="https://orders.foodme.mobi/dt/delhipalace/brantford/main" target="_blank" rel="noopener" aria-label="Order the Buy 2 for Special Price offer online">
-          <img src="/assets/img/promo-buy2-special.webp" width="1080" height="1350" decoding="async"
+          <img src="/assets/img/promo-buy2-special.webp" width="1080" height="1350" loading="lazy" decoding="async"
                alt="Buy 2 for a special price on your selected favourites at Delhi Palace Brantford. Offer valid on app and online orders only, for delivery and pickup. 46 Dalhousie St, Brantford.">
         </a>
         <span class="dp-bogo__badge" aria-hidden="true"><b>Buy 2</b><small>Special</small></span>
