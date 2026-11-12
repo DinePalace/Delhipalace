@@ -1,0 +1,40 @@
+/* ==========================================================================
+   DELHI PALACE: 15% off dine-in offer, floating image (added 2026-10)
+   The offer image floats in the bottom right corner, linked to FoodMe,
+   with a small close button. Self-contained; touches no other site styles.
+   ========================================================================== */
+.dp-offer-float{
+  position:fixed;right:16px;bottom:74px;z-index:46;
+  width:clamp(140px,15vw,210px);
+  opacity:0;visibility:hidden;transform:translateY(24px) scale(.94);
+  transition:opacity .45s ease,visibility .45s ease,transform .45s cubic-bezier(.22,.61,.36,1);
+}
+.dp-offer-float.is-in{opacity:1;visibility:visible;transform:none;}
+
+.dp-offer-float__link{
+  display:block;border-radius:12px;overflow:hidden;
+  box-shadow:0 18px 40px -12px rgba(0,0,0,.8);
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.dp-offer-float__link:hover,
+.dp-offer-float__link:focus-visible{transform:translateY(-4px);box-shadow:0 26px 50px -14px rgba(0,0,0,.9);}
+.dp-offer-float__link:focus-visible{outline:2px solid #edc775;outline-offset:3px;}
+
+.dp-offer-float__img{display:block;width:100%;height:auto;}
+
+.dp-offer-float__close{
+  position:absolute;top:-10px;right:-10px;z-index:2;
+  width:28px;height:28px;padding:0;border:0;border-radius:50%;
+  background:rgba(20,10,8,.92);color:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.45);
+  font-size:18px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s ease,transform .2s ease;
+}
+.dp-offer-float__close:hover,
+.dp-offer-float__close:focus-visible{background:#000;transform:scale(1.1);}
+.dp-offer-float__close:focus-visible{outline:2px solid #edc775;outline-offset:2px;}
+
+@media (prefers-reduced-motion:reduce){
+  .dp-offer-float,.dp-offer-float__link{transition:none;}
+}

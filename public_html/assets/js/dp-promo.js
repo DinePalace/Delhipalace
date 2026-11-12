@@ -1,5 +1,5 @@
 /* ==========================================================================
-   DELHI PALACE — promo pop-up
+   DELHI PALACE: promo pop-up
    Self-contained. Opens automatically shortly after page load on every page
    it is placed on. Close: button, backdrop click or Escape.
    ========================================================================== */
@@ -8,6 +8,26 @@
 
   var pop = document.querySelector("[data-dp-pop]");
   if (!pop) return;
+
+  /* ------------------------------------------------------------------------
+     WEEKEND OFFER SWITCH (Fri 13 to Sun 15 Nov 2026)
+     Until Monday 16 Nov 2026, 12:00 am Toronto time (EST = 05:00 UTC) the
+     pop-up shows the 50% off fried rice + noodles offer. From Monday on it
+     goes back to the Buy 2 for Special Price image already in the page.
+     Keep WEEKEND_END in step with the switch in the homepage <head>.
+     ------------------------------------------------------------------------ */
+  var WEEKEND_END = Date.UTC(2026, 10, 16, 5, 0, 0);
+  if (Date.now() < WEEKEND_END) {
+    var wkImg = pop.querySelector(".dp-pop__img");
+    var wkTitle = pop.querySelector(".dp-pop__title");
+    var wkLink = pop.querySelector(".dp-pop__imglink");
+    if (wkImg) {
+      wkImg.src = "/assets/img/promo-weekend-50-off.webp";
+      wkImg.alt = "Weekend cravings? 50% off veg and chicken fried rice plus noodles at Delhi Palace Brantford, only Friday 13 to Sunday 15 November. App and online ordering only, delivery and pickup only. 46 Dalhousie St, Brantford.";
+    }
+    if (wkTitle) wkTitle.textContent = "50% off veg and chicken fried rice plus noodles at Delhi Palace, Friday 13 to Sunday 15 November";
+    if (wkLink) wkLink.setAttribute("aria-label", "Order the 50% off fried rice and noodles weekend offer online");
+  }
 
   var dialog = pop.querySelector(".dp-pop__dialog");
   var closeBtn = pop.querySelector("[data-dp-pop-close]");

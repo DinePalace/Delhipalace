@@ -612,3 +612,14 @@ a.dish{color:inherit;text-decoration:none;}
 
 /* mobile navbar: pin ORDER NOW + hamburger to the right edge */
 @media (max-width:1040px){.nav-cta{margin-left:auto;}}
+
+/* ---------- top bar offer line ---------- */
+.topbar-offer{color:var(--cream-soft);flex-wrap:wrap;gap:4px 14px;letter-spacing:.14em;}
+.topbar-offer b{color:var(--gold);font-weight:600;}
+.topbar-offer a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s var(--ease);}
+.topbar-offer a:hover{border-bottom-color:var(--gold);}
+.topbar-offer .tb-sep{color:var(--gold-deep);}
+@media (max-width:640px){
+  .topbar-offer{font-size:10.5px;letter-spacing:.08em;flex-direction:column;gap:2px;padding:6px 12px;}
+  .topbar-offer .tb-sep{display:none;}
+}

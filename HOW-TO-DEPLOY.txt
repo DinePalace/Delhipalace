@@ -30,34 +30,41 @@ HOW TO DEPLOY
 ======================================================================
 HOSTINGER / cPANEL
   1. Open File Manager, go into public_html.
-  2. Turn on "Show hidden files" so .htaccess is not missed.
-  3. Delete or back up what is there now (WordPress site = take a
+  2. Delete or back up what is there now (WordPress site = take a
      full backup first).
-  4. Upload EVERYTHING that is INSIDE the public_html folder in this
-     zip: the 8 .html files, the assets folder, .htaccess,
-     robots.txt and sitemap.xml.
-     index.html must sit directly inside public_html, not inside a
-     sub folder.
-  5. Visit https://thedelhipalace.ca and click through the menu.
+  3. Upload EVERYTHING that is inside the repo's public_html folder:
+     index.html, 404.html, favicon.ico, llms.txt, robots.txt,
+     sitemap.xml, the assets folder, and each page folder
+     (about, menu, order, gallery, contact, blog, privacy-policy,
+     best-indian-food-brantford, brantford-takeout-delivery,
+     chinese-food-brantford, vegetarian-indian-food-brantford,
+     what-is-hakka-cuisine). Each page folder contains index.html.
+     The site root index.html must sit directly inside public_html,
+     not inside an extra sub folder.
+  4. Visit https://thedelhipalace.ca and click through the menu.
 
-CLOUDFLARE (DinePalace/Delhipalace repo)
-  Copy everything inside public_html into the repo's public/ folder,
-  push to main. The repo's own wrangler.jsonc already handles clean
-  URLs and the 404 page. .htaccess is ignored there, which is fine.
+CLOUDFLARE PAGES (DinePalace/Delhipalace repo)
+  The site files already live in public_html/. Push to main.
+  Pages settings: no build command, output directory public_html.
+  wrangler.jsonc points static assets at ./public_html and still
+  handles trailing-slash URLs and the 404 page.
 
 PREVIEW ON YOUR OWN COMPUTER
-  Double click public_html/index.html. All menu links work.
+  Pages are folder/index.html (menu/index.html, about/index.html, ...).
+  Links are absolute (/menu/), so open the site through a static server
+  that serves each folder's index.html. preview-server.js still expects
+  the older menu.html files.
 
 ======================================================================
 PAGE ADDRESSES (live)
 ======================================================================
   Home             https://thedelhipalace.ca/
-  Order Online     https://thedelhipalace.ca/order
-  Menu             https://thedelhipalace.ca/menu
-  About            https://thedelhipalace.ca/about
-  Gallery          https://thedelhipalace.ca/gallery
-  Contact Us       https://thedelhipalace.ca/contact
-  Privacy Policy   https://thedelhipalace.ca/privacy-policy
+  Order Online     https://thedelhipalace.ca/order/
+  Menu             https://thedelhipalace.ca/menu/
+  About            https://thedelhipalace.ca/about/
+  Gallery          https://thedelhipalace.ca/gallery/
+  Contact Us       https://thedelhipalace.ca/contact/
+  Privacy Policy   https://thedelhipalace.ca/privacy-policy/
 
   FüdMe ordering   https://orders.foodme.mobi/dt/delhipalace/brantford/main
   Phone            +1 (519) 304 9661
@@ -85,3 +92,12 @@ index.html straight from the folder will not navigate between pages.
 For a local preview run:  node preview-server.js  (in this folder)
 then open http://localhost:8124 — it behaves exactly like Hostinger,
 including the /about-us and /contact-us redirects.
+
+======================================================================
+UPDATE (2026-11-12)
+======================================================================
+Pages are folders with index.html (menu/index.html, about/index.html,
+and the same for order, gallery, contact, blog, privacy-policy, and
+the location pages). There is no .htaccess in this version. Upload the
+whole public_html folder. Cloudflare Pages: no build command, output
+directory public_html.
