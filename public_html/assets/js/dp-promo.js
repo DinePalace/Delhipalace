@@ -1,4 +1,81 @@
 /* ==========================================================================
+   DELHI PALACE: promo pop-up
+   Self-contained. Opens automatically shortly after page load on every page
+   it is placed on. Close: button, backdrop click or Escape.
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  var pop = document.querySelector("[data-dp-pop]");
+  if (!pop) return;
+
+  var dialog = pop.querySelector(".dp-pop__dialog");
+  var closeBtn = pop.querySelector("[data-dp-pop-close]");
+  var lastFocused = null;
+
+  function openPop() {
+    if (pop.classList.contains("is-open")) return;
+    lastFocused = document.activeElement;
+    pop.classList.add("is-open");
+    pop.removeAttribute("hidden");
+    pop.setAttribute("aria-hidden", "false");
+    document.body.classList.add("dp-pop-open");
+    if (closeBtn) {
+      try { closeBtn.focus({ preventScroll: true }); } catch (e) { closeBtn.focus(); }
+    }
+  }
+
+  function closePop() {
+    if (!pop.classList.contains("is-open")) return;
+    pop.classList.remove("is-open");
+    pop.setAttribute("aria-hidden", "true");
+    pop.setAttribute("hidden", "");
+    document.body.classList.remove("dp-pop-open");
+    if (lastFocused && typeof lastFocused.focus === "function") {
+      try { lastFocused.focus({ preventScroll: true }); } catch (e) {}
+    }
+  }
+
+  if (closeBtn) closeBtn.addEventListener("click", closePop);
+
+  pop.addEventListener("click", function (e) {
+    if (dialog && !dialog.contains(e.target)) closePop();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if ((e.key === "Escape" || e.key === "Esc") && pop.classList.contains("is-open")) {
+      closePop();
+    }
+  });
+
+  /* Keep focus inside the dialog while it is open */
+  pop.addEventListener("keydown", function (e) {
+    if (e.key !== "Tab" || !dialog) return;
+    var items = dialog.querySelectorAll('a[href], button:not([disabled])');
+    if (!items.length) return;
+    var first = items[0];
+    var last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  function schedule() {
+    window.setTimeout(openPop, 800);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", schedule);
+  } else {
+    schedule();
+  }
+})();
+
+/* ==========================================================================
    Guest favourites carousel: arrows, drag-to-scroll, edge state
    ========================================================================== */
 (function () {
