@@ -1,49 +1,8 @@
 /* ==========================================================================
-   DELHI PALACE: promo pop-up, homepage offer band and FAQ accordion
+   DELHI PALACE: homepage offer band, FAQ accordion, favourites and polish
    Self-contained. Loaded on top of styles.css / the home page inline styles.
    Palette uses the site tokens (--choc, --cream, --gold ...) with fallbacks.
    ========================================================================== */
-
-/* ---------- Auto-open promo pop-up ---------- */
-.dp-pop{
-  position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;
-  padding:clamp(14px,3vw,36px);
-  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;
-}
-.dp-pop.is-open{opacity:1;visibility:visible;}
-.dp-pop__backdrop{position:absolute;inset:0;background:rgba(20,10,8,.82);backdrop-filter:blur(3px);}
-.dp-pop__dialog{
-  position:relative;max-width:min(430px,92vw);max-height:92vh;width:100%;
-  background:var(--choc-2,#2a1512);border:1px solid var(--line,rgba(177,117,0,.34));
-  border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px;
-  box-shadow:0 30px 80px rgba(0,0,0,.55);
-  transform:translateY(14px) scale(.98);transition:transform .3s cubic-bezier(.22,.61,.36,1);
-}
-.dp-pop.is-open .dp-pop__dialog{transform:translateY(0) scale(1);}
-.dp-pop__title{
-  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-  clip:rect(0 0 0 0);white-space:nowrap;border:0;
-}
-.dp-pop__close{
-  position:absolute;top:-14px;right:-14px;z-index:2;width:38px;height:38px;
-  border-radius:50%;border:1px solid var(--gold,#edc775);
-  background:var(--choc,#231210);color:var(--gold,#edc775);
-  font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:background .2s ease,color .2s ease,transform .2s ease;
-}
-.dp-pop__close:hover,.dp-pop__close:focus-visible{background:var(--gold,#edc775);color:var(--choc,#231210);transform:scale(1.06);}
-.dp-pop__imglink{display:block;border-radius:9px;overflow:hidden;min-height:0;flex:1;}
-.dp-pop__imglink picture{display:block;height:100%;}
-.dp-pop__img{display:block;width:100%;height:100%;max-height:calc(92vh - 120px);object-fit:contain;background:#120806;}
-.dp-pop__cta{
-  display:flex;align-items:center;justify-content:center;text-align:center;
-  padding:13px 20px;border-radius:999px;
-  background:linear-gradient(180deg,#f4d896,var(--gold,#edc775));color:#231210;
-  font-weight:600;font-size:.92rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;
-  transition:filter .2s ease,transform .2s ease;
-}
-.dp-pop__cta:hover,.dp-pop__cta:focus-visible{filter:brightness(1.06);transform:translateY(-1px);}
-body.dp-pop-open{overflow:hidden;}
 
 /* ---------- Homepage limited-time offer band ---------- */
 .dp-offer{padding:var(--s-pad,clamp(58px,7vw,108px)) 0;border-top:1px solid var(--line-soft,rgba(177,117,0,.16));border-bottom:1px solid var(--line-soft,rgba(177,117,0,.16));}
@@ -241,59 +200,3 @@ body.dp-pop-open{overflow:hidden;}
 
 /* mobile navbar: pin ORDER NOW + hamburger to the right edge */
 @media (max-width:1040px){.nav-cta{margin-left:auto;}}
-
-
-/* ---------- Buy 1 Get 1 Free offer section (homepage + order page) ---------- */
-.dp-bogo{position:relative;overflow:hidden;
-  background:
-    radial-gradient(60% 70% at 18% 50%,rgba(177,40,20,.22),transparent 70%),
-    radial-gradient(50% 60% at 85% 20%,rgba(237,199,117,.08),transparent 70%);
-  border-top:1px solid var(--line-soft,rgba(177,117,0,.16));border-bottom:1px solid var(--line-soft,rgba(177,117,0,.16));}
-.dp-bogo__grid{display:grid;grid-template-columns:minmax(0,460px) minmax(0,1fr);gap:clamp(36px,6vw,84px);align-items:center;}
-.dp-bogo__media{position:relative;padding:14px;}
-.dp-bogo__media::before{content:"";position:absolute;inset:0;border:1px solid var(--line,rgba(177,117,0,.34));border-radius:20px;transform:rotate(-2.2deg);pointer-events:none;}
-.dp-bogo__art{position:relative;display:block;border-radius:16px;overflow:hidden;border:1px solid rgba(237,199,117,.45);
-  box-shadow:0 30px 70px -20px rgba(0,0,0,.65),0 0 0 6px rgba(35,18,16,.6);transition:transform .5s var(--ease,ease),box-shadow .5s var(--ease,ease);}
-.dp-bogo__art:hover{transform:translateY(-4px);box-shadow:0 38px 80px -20px rgba(0,0,0,.7),0 0 0 6px rgba(35,18,16,.6);}
-.dp-bogo__art picture{display:block;}
-.dp-bogo__art img{display:block;width:100%;height:auto;}
-.dp-bogo__badge{position:absolute;right:-6px;top:-6px;width:96px;height:96px;border-radius:50%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;
-  background:radial-gradient(circle at 35% 30%,#f7d891,var(--gold,#edc775) 55%,#c99a3c);color:#2a1408;
-  box-shadow:0 14px 30px -10px rgba(0,0,0,.7),inset 0 0 0 3px rgba(42,20,8,.18);transform:rotate(10deg);}
-.dp-bogo__badge b{font-family:var(--font-display);font-size:30px;font-weight:700;letter-spacing:-.02em;}
-.dp-bogo__badge small{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-top:4px;}
-.dp-bogo__copy h2.title em{font-style:italic;color:var(--gold,#edc775);}
-.dp-bogo__facts{list-style:none;margin:26px 0 30px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
-.dp-bogo__facts li{display:flex;gap:13px;align-items:flex-start;padding:14px 16px;border:1px solid var(--line-soft,rgba(177,117,0,.16));
-  border-radius:12px;background:rgba(253,244,223,.03);transition:border-color .35s var(--ease,ease),background-color .35s var(--ease,ease);}
-.dp-bogo__facts li:hover{border-color:var(--line,rgba(177,117,0,.34));background:rgba(253,244,223,.05);}
-.dp-bogo__facts li > span:last-child{display:flex;flex-direction:column;font-size:.86rem;line-height:1.45;color:var(--cream-soft,rgba(253,244,223,.76));}
-.dp-bogo__facts b{color:var(--cream,#fdf4df);font-weight:600;font-size:.95rem;margin-bottom:2px;}
-.dp-bogo__ic{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--gold,#edc775);
-  border:1px solid var(--line,rgba(177,117,0,.34));background:rgba(237,199,117,.07);}
-.dp-bogo__ic svg{width:19px;height:19px;}
-.dp-bogo__apps{margin:20px 0 0;font-size:.9rem;color:var(--cream-soft,rgba(253,244,223,.76));}
-.dp-bogo__apps a{color:var(--gold,#edc775);border-bottom:1px solid rgba(237,199,117,.35);transition:border-color .3s;}
-.dp-bogo__apps a:hover{border-color:var(--gold,#edc775);}
-.dp-bogo__note{margin-top:10px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream-faint,rgba(253,244,223,.46));}
-@media (max-width:900px){
-  .dp-bogo__grid{grid-template-columns:1fr;}
-  .dp-bogo__media{max-width:440px;margin-inline:auto;width:100%;}
-}
-@media (max-width:560px){
-  .dp-bogo__facts{grid-template-columns:1fr;}
-  .dp-bogo__badge{width:78px;height:78px;right:-2px;top:-2px;}
-  .dp-bogo__badge b{font-size:24px;}
-  .dp-bogo .btn-row .btn{flex:1 1 100%;justify-content:center;text-align:center;}
-}
-
-/* ==========================================================================
-   WEEKEND OFFER SWITCH (Fri 13 to Sun 15 Nov 2026)
-   The <head> of the homepage adds .dp-wknd to <html> until Monday 16 Nov,
-   12:00 am Toronto time. While it is there the weekend section shows and the
-   Buy 2 section hides. Without the class (from Monday on) it is the reverse.
-   ========================================================================== */
-.dp-bogo--weekend{display:none;}
-html.dp-wknd .dp-bogo--weekend{display:block;}
-html.dp-wknd .dp-bogo--regular{display:none;}
